@@ -30,6 +30,15 @@ chmod +x INSTALL
 
 By using this script you agree all the terms of the "LICENSE" file.
 
+The script supports the following langages:
+
+   • ENGLISH
+   • DEUTSCH
+   • FRENCH
+   • SPANISH
+   
+If your langage is not on the list, the script is gona be in english.
+   
 github page: https://github.com/ZKAW/VerifyMail
 
 contact email: private.zkaw@gmail.com
