@@ -1,0 +1,530 @@
+#!/usr/bin/env python
+# -*- coding: iso-8859-15 -*-
+
+
+import locale
+import time
+import os
+
+from os import system
+from sys import stdout, exit
+
+from validate_email import validate_email
+
+results = []
+lng = []
+conffldr = "/root/.verifymail"
+listfldr = "/root/.verifymail/lists"
+verifiedfldr = "/root/.verifymail/verified"
+if not os.path.exists(conffldr):
+    os.makedirs(conffldr)
+if not os.path.exists(listfldr):
+    os.makedirs(listfldr)
+if not os.path.exists(verifiedfldr):
+    os.makedirs(verifiedfldr)
+os.chdir(conffldr)
+system('clear')
+
+DEFAULT, BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, LIGHTGRAY, DARKGRAY, LIGHTRED, LIGHTGREEN, LIGHTYELLOW, LIGHTBLUE, LIGHTMAGENTA, LIGHTCYAN, WHITE, GRAY = '\33[39m', '\33[30m', '\33[31m', '\33[32m', '\33[33m', '\33[34m', '\33[35m', '\33[36m', '\33[37m', '\33[90m', '\33[91m', '\33[92m', '\33[93m', '\33[94m', '\33[95m', '\33[96m', '\33[97m', '\33[30m'
+
+
+
+
+locale.setlocale(locale.LC_ALL, "")
+lng = locale.getlocale(locale.LC_MESSAGES)[0]
+
+#langage
+
+if 'fr' in lng:
+  print("\n")
+  print(LIGHTBLUE + "Langue" + BLUE + " française " + LIGHTBLUE + "reconnue, ajustement de la traduction...")
+  print("\n.")
+  time.sleep(0.3)
+  print("..")
+  time.sleep(0.3)
+  print("...\n")
+  time.sleep(0.3)
+  system('clear')
+  AideVar = '''
+  {0}Sélectionnez une option:
+
+
+  {3}[{2}1{3}]{2}     Effectuer une recherche pour une seule email.
+  {3}[{2}2{3}]{2}     Effectuer une recherche depuis une liste d'email.
+  {3}[{2}3{3}]{2}     Créer une liste d'email.
+
+  {3}[{1}0{3}]{1}     Quitter.
+
+  '''.format(LIGHTGRAY, MAGENTA, LIGHTMAGENTA, GRAY)
+
+  InvalidPathVar = '''
+
+
+  {0}************************************
+
+    {0}[!] {1}Chemain d'accès invalide {0}[!]
+
+  ************************************
+
+    '''.format(RED, LIGHTRED)
+
+
+  MultiInputVar = "\n  Chemin d'accès menant à la liste d'email (.txt): "
+
+  EmailFoundedVar = " [✔] Email trouvé !"
+
+  EmailValidVar = " [✔] Email valide !"
+
+  EmailInvalidVar = " [✘] Email invalide !"
+
+  EmailToVerifyVar = "  Email à vérifier: "
+
+  FirstNameVar = "  Prénom: "
+
+  LastNameVar = "  Nom: "
+
+  FileNameVar = "  Nom du fichier: "
+
+  AddedListVar1 = '\n\n Liste ajoutée/modifiée avec succès sous le nom "'
+
+  AddedListVar2 = '" pour '
+
+  GoodByeVar = "\n Merci d'avoir utilisé"
+
+  MultiFileNameVar = "  Nom du fichier de sauvegarde: "
+
+  ActualPathVar = " Chemin actuel: "
+
+else:
+
+   if 'de' in lng:
+
+     print("\n")
+     print(BLUE + "Deutsche" + LIGHTBLUE + " Sprache erkannt, Übersetzungsanpassung")
+     print("\n.")
+     time.sleep(0.3)
+     print("..")
+     time.sleep(0.3)
+     print("...\n")
+     time.sleep(0.3)
+     system('clear')
+     AideVar = '''
+  {0}Wählen Sie eine Option:
+
+
+  {3}[{2}1{3}]{2}     Suchen Sie nach einer einzelnen E-Mail.
+  {3}[{2}2{3}]{2}     Führen Sie eine Suche mit einer E-Mail-Liste durch.
+  {3}[{2}3{3}]{2}     Erstellen Sie eine E-Mail-Liste.
+
+  {3}[{1}0{3}]{1}     Verlassen.
+
+     '''.format(LIGHTGRAY, MAGENTA, LIGHTMAGENTA, GRAY)
+
+     InvalidPathVar = '''
+
+
+  {0}************************************
+
+      {0}[!] {1}Ungültigen Pfad {0}[!]
+
+  ************************************
+
+     '''.format(RED, LIGHTRED)
+
+
+     MultiInputVar = "\n  Pfad zu einer E-Mail-Liste (.txt): "
+
+     EmailFoundedVar = " [✔] E-Mail gefunden !"
+
+     EmailValidVar = " [✔] Gültige E-Mail !"
+
+     EmailInvalidVar = " [✘] Ungültige E-Mail !"
+
+     EmailToVerifyVar = "  Zu prüfende E-Mail: "
+
+     FirstNameVar = "  Vorname: "
+
+     LastNameVar = "  Name: "
+
+     FileNameVar = "  Name der Datei: "
+
+     AddedListVar1 = '\n\n Liste hinzugefügt / geändert erfolgreich unter dem Namen "'
+
+     AddedListVar2 = '" für '
+
+     GoodByeVar = "\n Vielen Dank für die Verwendung von "
+
+     MultiFileNameVar = "  Name der Sicherungsdatei "
+
+     ActualPathVar = " Aktueller Pfad: "
+
+
+   else:
+
+        if 'es' in lng:
+
+            print("\n")
+            print(LIGHTBLUE + "Detección del idioma" + BLUE + " Español " + LIGHTBLUE + ", ajuste de la traducción")
+            print("\n.")
+            time.sleep(0.3)
+            print("..")
+            time.sleep(0.3)
+            print("...\n")
+            time.sleep(0.3)
+            system('clear')
+            AideVar = '''
+  {0}Seleccione una opción:
+
+
+  {3}[{2}1{3}]{2}     Efectuar una búsqueda de un único correo electrónico.
+  {3}[{2}2{3}]{2}     Buscar en una lista de correo electrónico.
+  {3}[{2}3{3}]{2}     Crear una lista de correo electrónico.
+
+  {3}[{1}0{3}]{1}     Salir.
+
+            '''.format(LIGHTGRAY, MAGENTA, LIGHTMAGENTA, GRAY)
+
+            InvalidPathVar = '''
+
+
+  {0}************************************
+
+ {0}[!] {1}Ruta de acceso no válida {0}[!]
+
+  ************************************
+
+            '''.format(RED, LIGHTRED)
+
+
+            MultiInputVar = "\n  Camino de acceso a la lista de email (.txt): "
+
+            EmailFoundedVar = " [✔] Email encontrado !"
+
+            EmailValidVar = " [✔] Email válido !"
+
+            EmailInvalidVar = " [✘] Email inválido !"
+
+            EmailToVerifyVar = "  Email para verificar: "
+
+            FirstNameVar = "  Nombre: "
+
+            LastNameVar = "  Apellido: "
+
+            FileNameVar = "  Nombre de fichero: "
+
+            AddedListVar1 = '\n\n Lista añadida/modificada con éxito bajo el nombre "'
+
+            AddedListVar2 = '" para '
+
+            GoodByeVar = "\n Gracias por usar"
+
+            MultiFileNameVar = "  Nombre del fichero de copia de seguridad: "
+
+            ActualPathVar = " Camino actual: "
+
+
+        else:
+
+             print("\n")
+             print(BLUE + "English" + LIGHTBLUE + " langage detected, adjustment of the translation...")
+             print("\n.")
+             time.sleep(0.3)
+             print("..")
+             time.sleep(0.3)
+             print("...\n")
+             time.sleep(0.3)
+             system('clear')
+
+             AideVar = '''
+  {0}Select an option:
+
+
+  {3}[{2}1{3}]{2}     Perform a search of a single email.
+  {3}[{2}2{3}]{2}     Perfom a search from an email list.
+  {3}[{2}3{3}]{2}     Create an email list.
+
+  {3}[{1}0{3}]{1}     Exit.
+
+             '''.format(LIGHTGRAY, MAGENTA, LIGHTMAGENTA, GRAY)
+
+             InvalidPathVar = '''
+
+
+  {0}*************************************
+
+          {0}[!] {1}Invalid Path {0}[!]
+
+  *************************************
+
+             '''.format(RED, LIGHTRED)
+
+
+             MultiInputVar = "\n  Path leading to an email list (.txt): "
+
+             EmailFoundedVar = " [✔] Email founded !"
+
+             EmailValidVar = " [✔] Email validated !"
+
+             EmailInvalidVar = " [✘] Invalid email !"
+
+             EmailToVerifyVar = "  Email to verify: "
+
+             FirstNameVar = "  First name: "
+
+             LastNameVar = "  Last name: "
+
+             FileNameVar = "  Name of the file: "
+
+             AddedListVar1 = '\n\n List added/modified with success under the name "'
+
+             AddedListVar2 = '" for '
+
+             GoodByeVar = "\n Thanks for using"
+
+             MultiFileNameVar = "  Name of the backup file: "
+
+             ActualPathVar = "  Actual path: "
+
+
+
+
+
+#langage
+
+
+def aide():
+
+  print(AideVar)
+
+
+
+def welcome():
+
+
+  print '''
+
+{2}  ██╗   ██╗███████╗██████╗ ██╗███████╗██╗   ██╗ ███╗   ███╗ █████╗ ██╗██╗
+{2}  ██║   ██║██╔════╝██╔══██╗██║██╔════╝╚██╗ ██╔╝ ████╗ ████║██╔══██╗██║██║
+{2}  ██║   ██║█████╗  ██████╔╝██║█████╗   ╚████╔╝  ██╔████╔██║███████║██║██║
+{1}  ╚██╗ ██╔╝██╔══╝  ██╔══██╗██║██╔══╝    ╚██╔╝   ██║╚██╔╝██║██╔══██║██║██║
+ {1}  ╚████╔╝ ███████╗██║  ██║██║██║        ██║    ██║ ╚═╝ ██║██║  ██║██║███████╗
+  {1}  ╚═══╝  ╚══════╝╚═╝  ╚═╝╚═╝╚═╝        ╚═╝    ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝╚══════╝
+                                                        {3}╔╗ ┬ ┬  ╔═╗╦╔═╔═╗╦ ╦
+                                                 {0}───    {3}╠╩╗└┬┘  ╔═╝╠╩╗╠═╣║║║
+    -> v1.0                                             {3}╚═╝ ┴   ╚═╝╩ ╩╩ ╩╚╩╝
+                                      {2}The possible is already done,
+                                               {1}working on the impossible.'''.format(LIGHTGRAY, MAGENTA, LIGHTMAGENTA, LIGHTRED, RED, GRAY)
+
+
+
+def multi():
+
+
+ while True:
+  try:
+    os.chdir(listfldr)
+    print("\n" + LIGHTBLUE + ActualPathVar + BLUE + os.getcwd() + "/")
+    inputfil = raw_input(LIGHTMAGENTA + MultiInputVar + LIGHTGRAY)
+    multifilename = raw_input(LIGHTMAGENTA + MultiFileNameVar + LIGHTGRAY)
+    system('clear')
+    print("")
+    fd = open(inputfil, 'r')
+    n = 0
+    for line in fd:
+     n += 1
+    with open(inputfil) as inputfile:
+        for line in inputfile:
+            results.append(line.strip())
+
+    count = 0
+    for i in results:
+        is_valid = validate_email(i,verify=True)
+        count += 1
+
+
+        if str(is_valid).upper() == "TRUE":
+            os.chdir(verifiedfldr)
+            stdout.write(GREEN + EmailFoundedVar + " - [" + i + "]"+ BLUE + " {email " + str(count) + " / " + str(n) + "}\n" + LIGHTGRAY)
+
+            outF = open(multifilename + ".txt", "a")
+
+            outF.write(i + "\n")
+
+            outF.close()
+
+
+
+        else:
+         stdout.write(RED + EmailInvalidVar + " - [" + i + "]"+ BLUE + " {email " + str(count) + " / " + str(n) + "}\n" + LIGHTGRAY)
+    if count == n:
+          system('clear')
+          if 'fr' in lng:
+                SearchFinishedVar =(LIGHTBLUE + '\n  Recherche' + BLUE + ' terminée ' + LIGHTBLUE + 'avec succès et enregistrée avec le nom "' + BLUE + multifilename + LIGHTBLUE + '" !')
+          else:
+              if 'de' in lng:
+                  SearchFinishedVar =(LIGHTBLUE + '\n  Suche' + BLUE + ' erfol  greich ' + LIGHTBLUE + 'abgeschlossen und unter dem Namen gespeichert "' + BLUE + multifilename + LIGHTBLUE + '" !')
+              else:
+                  if 'es' in lng:
+                      SearchFinishedVar =(LIGHTBLUE + '\n  Búsqueda' + BLUE + ' terminada ' + LIGHTBLUE + 'con éxito y guardada con el nombre "' + BLUE + multifilename + LIGHTBLUE + '" !')
+                  else:
+                      SearchFinishedVar =(LIGHTBLUE + '\n  Search' + BLUE + ' finished ' + LIGHTBLUE + 'with success and saved with the name "' + BLUE + multifilename + LIGHTBLUE + '" !')
+
+          print(GREEN + SearchFinishedVar)
+          aide()
+          while True:
+              try:
+                  ask = raw_input(LIGHTMAGENTA + "  VerifyMail > " + LIGHTGRAY)
+                  if ask.upper() == "1":
+                      single()
+                  if ask.upper() == "2":
+                      multi()
+                  if ask.upper() == "3":
+                      creator()
+                  if ask.upper() == "0":
+                      exit(0)
+              except:
+                  exit(0)
+  except:
+
+
+   system('clear')
+   print(InvalidPathVar)
+   aide()
+   while True:
+       try:
+           ask = raw_input(LIGHTMAGENTA + "  VerifyMail > " + LIGHTGRAY)
+           if ask.upper() == "1":
+               single()
+           if ask.upper() == "2":
+               multi()
+           if ask.upper() == "3":
+               creator()
+           if ask.upper() == "0":
+               exit(0)
+
+       except:
+           exit(0)
+
+
+
+
+
+
+def single():
+  try:
+    email = raw_input(LIGHTMAGENTA + EmailToVerifyVar + LIGHTGRAY)
+    is_valid = validate_email(email,verify=True)
+    if str(is_valid).upper() == "TRUE":
+        stdout.write(GREEN + EmailValidVar + " - [" + email + "]\n" + LIGHTGRAY)
+    else:
+	stdout.write(RED + EmailInvalidVar + " - [" + email + "]\n" + LIGHTGRAY)
+
+  except KeyboardInterrupt:
+      system('clear')
+      aide()
+
+
+def creator():
+
+  try:
+
+    prenom = raw_input (LIGHTMAGENTA + FirstNameVar + LIGHTGRAY)
+
+
+
+    nom = raw_input (LIGHTMAGENTA + LastNameVar + LIGHTGRAY)
+
+
+    filename = raw_input (LIGHTMAGENTA + FileNameVar + LIGHTGRAY)
+
+
+
+    outF = open("/root/.verifymail/lists/" + filename + ".txt", "a")
+
+
+
+
+#prenom.nom
+
+    outF.write(prenom+"."+nom+"@gmail.com\n")
+    outF.write(prenom+"."+nom+"@hotmail.com\n")
+    outF.write(prenom+"."+nom+"@hotmail.fr\n")
+    outF.write(prenom+"."+nom+"@outlook.com\n")
+    outF.write(prenom+"."+nom+"@orange.fr\n")
+    outF.write(prenom+"."+nom+"@wanadoo.fr\n")
+
+    outF.write(prenom+"."+nom+"@laposte.net\n")
+
+
+
+
+#nom.prenom
+
+
+
+    outF.write(nom+"."+prenom+"@gmail.com\n")
+    outF.write(nom+"."+prenom+"@hotmail.com\n")
+    outF.write(nom+"."+prenom+"@hotmail.fr\n")
+    outF.write(nom+"."+prenom+"@outlook.com\n")
+    outF.write(nom+"."+prenom+"@orange.fr\n")
+    outF.write(nom+"."+prenom+"@wanadoo.fr\n")
+
+    outF.write(nom+"."+prenom+"@laposte.net\n")
+
+
+
+
+#prenomnom
+
+
+    outF.write(prenom+nom+"@gmail.com\n")
+    outF.write(prenom+nom+"@hotmail.com\n")
+    outF.write(prenom+nom+"@hotmail.fr\n")
+    outF.write(prenom+nom+"@outlook.com\n")
+    outF.write(prenom+nom+"@orange.fr\n")
+    outF.write(prenom+nom+"@wanadoo.fr\n")
+    outF.write(prenom+nom+"@laposte.net\n")
+
+
+#nomprenom
+
+
+    outF.write(nom+prenom+"@gmail.com\n")
+    outF.write(nom+prenom+"@hotmail.com\n")
+    outF.write(nom+prenom+"@hotmail.fr\n")
+    outF.write(nom+prenom+"@outlook.com\n")
+    outF.write(nom+prenom+"@orange.fr\n")
+    outF.write(nom+prenom+"@wanadoo.fr\n")
+    outF.write(nom+prenom+"@laposte.net\n")
+
+
+
+    outF.close()
+    system('clear')
+    print(AddedListVar1 + MAGENTA +filename+ LIGHTGRAY + AddedListVar2 + MAGENTA + prenom + ' ' + nom + LIGHTGRAY + ' !\n')
+    aide()
+
+  except KeyboardInterrupt:
+      system('clear')
+      aide()
+welcome()
+aide()
+
+
+
+while True:
+    try:
+        ask = raw_input(LIGHTMAGENTA + "  VerifyMail > " + LIGHTGRAY)
+        if ask.upper() == "1":
+               single()
+        if ask.upper() == "2":
+               multi()
+        if ask.upper() == "3":
+               creator()
+        if ask.upper() == "0":
+               exit(0)
+
+
+    except:
+        print("\n" + MAGENTA + GoodByeVar + LIGHTMAGENTA + " VerifyMail " + MAGENTA + "!\n")
+        exit(0)

@@ -1,0 +1,22 @@
+#!/usr/bin/env python
+# -*- coding: iso-8859-15 -*-
+
+import sys
+import os
+from os import system
+
+DEFAULT, BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, LIGHTGRAY, DARKGRAY, LIGHTRED, LIGHTGREEN, LIGHTYELLOW, LIGHTBLUE, LIGHTMAGENTA, LIGHTCYAN, WHITE, GRAY = '\33[39m', '\33[30m', '\33[31m', '\33[32m', '\33[33m', '\33[34m', '\33[35m', '\33[36m', '\33[37m', '\33[90m', '\33[91m', '\33[92m', '\33[93m', '\33[94m', '\33[95m', '\33[96m', '\33[97m', '\33[30m'
+
+
+yes = {'yes', 'y', 'YES', 'Y',}
+no = {'no' ,'n', 'NO', 'N', ''}
+
+choice = raw_input(LIGHTBLUE + "\n Do you realy want to uninstall me ? :'( (y/n): ").lower()
+print("")
+if choice in yes:
+   system('rm -r /usr/bin/verifymail')
+   print(LIGHTRED + " Uninstalled ! " + LIGHTBLUE + "If you encountered any problem, let me know on my github page. \n")
+elif choice in no:
+   print(LIGHTGREEN + " Glad you changed your mind :) \n")
+else:
+   sys.stdout.write(RED + "[!]" + LIGHTRED + "Please respond with 'yes' or 'no'")

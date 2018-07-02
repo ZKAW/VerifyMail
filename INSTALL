@@ -1,0 +1,91 @@
+#!/usr/bin/env python
+# -*- coding: iso-8859-15 -*-
+
+import time
+import os
+import pip
+from os import system
+
+from os import path
+import shutil
+from sys import stdout, exit
+
+DEFAULT, BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, LIGHTGRAY, DARKGRAY, LIGHTRED, LIGHTGREEN, LIGHTYELLOW, LIGHTBLUE, LIGHTMAGENTA, LIGHTCYAN, WHITE, GRAY = '\33[39m', '\33[30m', '\33[31m', '\33[32m', '\33[33m', '\33[34m', '\33[35m', '\33[36m', '\33[37m', '\33[90m', '\33[91m', '\33[92m', '\33[93m', '\33[94m', '\33[95m', '\33[96m', '\33[97m', '\33[30m'
+
+system('clear')
+
+
+
+pyth2path = '/usr/bin/python2.7'
+pip2path = '/usr/bin/pip2'
+conffldr = "/root/.verifymail"
+listfldr = "/root/.verifymail/lists"
+verifiedfldr = "/root/.verifymail/verified"
+
+
+print(RED + "\n[!] " + LIGHTRED + "REMINDER: THE SCRIPT IS ONLY WORKING WITH" + RED + " Python 2.7 " + LIGHTRED + "!\n")
+
+time.sleep(1.5)
+
+print(BLUE + " Checking if Python 2.7 is installed...")
+
+time.sleep(0.5)
+
+if os.path.exists(pyth2path):
+    print(BLUE + ' Python 2.7 is ready to use !')
+else:
+    print(LIGHTRED + '\n[!] ' + BLUE + 'Python 2.7 is not installed, installing it for you.\n' + LIGHTBLUE)
+    time.sleep(1.5)
+    system('apt-get install python2.7')
+
+
+time.sleep(1.5)
+
+print(BLUE + "\n Checking if pip2 is installed...")
+
+time.sleep(0.5)
+
+if os.path.exists(pyth2path):
+    print(BLUE + ' pip2 is ready to use !')
+else:
+    print(LIGHTRED + '\n[!] ' + BLUE + 'pip2 is not installed, installing it for you.\n' + LIGHTBLUE)
+    time.sleep(1.5)
+    system('apt-get install python-pip')
+
+time.sleep(0.5)
+print(BLUE + "\n Fixing permissions...")
+system('chmod +x verifymail')
+system('chmod +x INSTALL')
+system('chmod +x UNINSTALL')
+
+
+
+print(BLUE + "\n Creating .verifymail config files in /root/.verifymail" + LIGHTBLUE)
+time.sleep(0.5)
+print(BLUE + " Creating /root/.verifymail/" + LIGHTBLUE)
+time.sleep(0.5)
+if not os.path.exists(conffldr):
+    os.makedirs(conffldr)
+print(BLUE + " Creating /root/.verifymail/lists" + LIGHTBLUE)
+time.sleep(0.5)
+if not os.path.exists(listfldr):
+    os.makedirs(listfldr)
+print(BLUE + " Creating /root/.verifymail/verified" + LIGHTBLUE)
+time.sleep(0.5)
+if not os.path.exists(verifiedfldr):
+    os.makedirs(verifiedfldr)
+
+
+print(BLUE + '\n Installing requirements from "requirements.txt" file\n' + LIGHTBLUE)
+time.sleep(0.5)
+system('pip2 install -r requirements.txt')
+
+time.sleep(0.5)
+
+print(BLUE + '\n Copying the script in /usr/bin for executing it by typing ' + LIGHTBLUE + '"verifymail"')
+
+shutil.copy2('verifymail', '/usr/bin/')
+
+time.sleep(0.5)
+
+print(BLUE + '\n The script is now installed, restart your terminal and type ' + LIGHTBLUE + '"verifymail"' + BLUE + '\n to launch it !\n')
