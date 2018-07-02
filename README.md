@@ -16,7 +16,7 @@ sudo apt-get install python2.7
 
 --------------------DOWNLOAD---------------------
 
-git clone https://github.com/ZKAW/VerifyMail.git
+git clone https://github.com/ZKAW/VerifyMail
 
 --------------------INSTALL----------------------
 
@@ -30,7 +30,7 @@ chmod +x INSTALL
 
 By using this script you agree all the terms of the "LICENSE" file.
 
-github page: https://github.com/ZKAW/VerifyMail.git
+github page: https://github.com/ZKAW/VerifyMail
 
 contact email: private.zkaw@gmail.com
 
