@@ -11,7 +11,7 @@ DEFAULT, BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, LIGHTGRAY, DARKGRAY, LI
 yes = {'yes', 'y', 'YES', 'Y',}
 no = {'no' ,'n', 'NO', 'N', ''}
 
-choice = raw_input(LIGHTBLUE + "\n Do you realy want to uninstall me ? :'( (y/n): ").lower()
+choice = raw_input(LIGHTBLUE + "\n Do you really want to uninstall me ? :'( (y/n): ").lower()
 print("")
 if choice in yes:
    system('rm -r /usr/bin/verifymail')
