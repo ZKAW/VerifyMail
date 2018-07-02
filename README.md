@@ -1,9 +1,9 @@
 # VerifyMail
-VerifyMail is a python script to verify if an email is valid or not by make a single search 
-or make a search from an email list.
-The script as the fonctionality to create email lists.
+Copyright (c) 2018 VerifyMail
 
-Copyright 2018 VerifyMail
+VerifyMail is a python script to check if one or more emails are valid
+The script has the fonctionality to create email lists.
+
 
 By: **ZKAW**
 
