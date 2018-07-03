@@ -322,6 +322,7 @@ def multi():
 
  while True:
   try:
+    results = []
     os.chdir(listfldr)
     print("\n" + LIGHTBLUE + ActualPathVar + BLUE + os.getcwd() + "/")
     inputfil = raw_input(LIGHTMAGENTA + MultiInputVar + LIGHTGRAY)
@@ -386,7 +387,7 @@ def multi():
                   exit(0)
   except:
 
-
+   results = []
    system('clear')
    print(InvalidPathVar)
    aide()
