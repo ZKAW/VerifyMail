@@ -316,7 +316,7 @@ def multi():
   try:
     results = []
     os.chdir(listfldr)
-    print("\n" + LIGHTBLUE + ActualPathVar + BLUE + os.getcwd() + "/")
+    print("\n" + LIGHTBLUE + ActualPathVar + BLUE + os.getcwd() + "/\n")
     lists = os.listdir(listfldr)
     print(lists)
     inputfil = raw_input(LIGHTMAGENTA + MultiInputVar + LIGHTGRAY)
