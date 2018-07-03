@@ -14,30 +14,31 @@ You can install it by launching the INSTALL file, or by typing
 sudo apt-get install python2.7
 
 
---------------------DOWNLOAD---------------------
+**DOWNLOAD**
 
-git clone https://github.com/ZKAW/VerifyMail.git
+`git clone https://github.com/ZKAW/VerifyMail.git`
 
---------------------INSTALL----------------------
+**INSTALL**
 
-cd VerifyMail
+`cd VerifyMail`
 
-chmod +x INSTALL
+`chmod +x INSTALL`
 
-./INSTALL
+`./INSTALL`
 
----------------------INFO------------------------
+**INFO**
 
 By using this script you agree all the terms of the "LICENSE" file.
 
-The script supports the following langages:
+The script supports the following languages:
 
    • ENGLISH
    • DEUTSCH
    • FRENCH
    • SPANISH
    
-If your langage is not on the list, the script is gona be in english.
+If your language is not listed, the script is gona be in english.
+You can still ask me to add your language ;)
    
 github page: https://github.com/ZKAW/VerifyMail
 
