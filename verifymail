@@ -152,9 +152,9 @@ else:
 
      AddedListVar2 = '" für '
 
-     GoodByeVar = "\n Vielen Dank für die Verwendung von "
+     GoodByeVar = "\n Vielen Dank für die Verwendung von"
 
-     MultiFileNameVar = "  Name der Sicherungsdatei "
+     MultiFileNameVar = "  Name der Sicherungsdatei: "
 
      ActualPathVar = " Aktueller Pfad: "
 
