@@ -64,7 +64,6 @@ if 'fr' in lng:
     {0}[!] {1}Chemain d'accès invalide {0}[!]
 
   ************************************
-
     '''.format(RED, LIGHTRED)
 
 
@@ -126,7 +125,6 @@ else:
       {0}[!] {1}Ungültigen Pfad {0}[!]
 
   ************************************
-
      '''.format(RED, LIGHTRED)
 
 
@@ -189,7 +187,6 @@ else:
     {0}[!] {1}Ruta de acceso no válida {0}[!]
 
   ************************************
-
             '''.format(RED, LIGHTRED)
 
 
@@ -251,7 +248,6 @@ else:
           {0}[!] {1}Invalid Path {0}[!]
 
   *************************************
-
              '''.format(RED, LIGHTRED)
 
 
