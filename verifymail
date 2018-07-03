@@ -325,6 +325,8 @@ def multi():
     results = []
     os.chdir(listfldr)
     print("\n" + LIGHTBLUE + ActualPathVar + BLUE + os.getcwd() + "/")
+    lists = os.listdir(listfldr)
+    print(lists)
     inputfil = raw_input(LIGHTMAGENTA + MultiInputVar + LIGHTGRAY)
     multifilename = raw_input(LIGHTMAGENTA + MultiFileNameVar + LIGHTGRAY)
     system('clear')
