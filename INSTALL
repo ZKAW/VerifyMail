@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-15 -*-
+#github: https://github.com/ZKAW/VerifyMail
+
 
 import time
 import os
@@ -57,7 +59,7 @@ print(BLUE + "\n Fixing permissions...")
 system('chmod +x verifymail')
 system('chmod +x INSTALL')
 system('chmod +x UNINSTALL')
-
+system('chmod +x UPDATE')
 
 
 print(BLUE + "\n Creating .verifymail config files in /root/.verifymail" + LIGHTBLUE)
@@ -89,3 +91,4 @@ shutil.copy2('verifymail', '/usr/bin/')
 time.sleep(0.5)
 
 print(BLUE + '\n The script is now installed, restart your terminal and type ' + LIGHTBLUE + '"verifymail"' + BLUE + '\n to launch it !\n')
+quit()

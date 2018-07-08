@@ -1,0 +1,30 @@
+#!/usr/bin/python
+# -*- coding: iso-8859-15 -*-
+#github: https://github.com/ZKAW/VerifyMail
+
+import urllib2,subprocess
+version = urllib2.urlopen("https://raw.githubusercontent.com/ZKAW/VerifyMail/master/version.txt").read()
+DEFAULT, BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, LIGHTGRAY, DARKGRAY, LIGHTRED, LIGHTGREEN, LIGHTYELLOW, LIGHTBLUE, LIGHTMAGENTA, LIGHTCYAN, WHITE, GRAY = '\33[39m', '\33[30m', '\33[31m', '\33[32m', '\33[33m', '\33[34m', '\33[35m', '\33[36m', '\33[37m', '\33[90m', '\33[91m', '\33[92m', '\33[93m', '\33[94m', '\33[95m', '\33[96m', '\33[97m', '\33[30m'
+
+
+def check_version(version):
+    with open("version.txt", "r") as vnumber:
+        if vnumber.read() != version:
+            return True
+        else:
+            return False
+
+
+def main():
+
+    if check_version(version) is True:
+        subprocess.call(["git", "pull", "origin", "master"])
+        return " [✔] Successfully updated     to latest version: v{0}".format(version)
+    if check_version(version) is False:
+        return " {2}[✔]{1} You are already up to date in {2}v{0}{1}".format(version, LIGHTBLUE, BLUE)
+    else:
+        return " {1}[✘]{0} An unknown {1}error{0} occurred during the update.\n".format(LIGHTRED, RED)
+
+if __name__ == '__main__':
+    print("\n     {1}Checking {0}if you are up to date{1}...{0}\n").format(LIGHTBLUE, BLUE)
+    print(main())
