@@ -40,7 +40,7 @@ The script supports the following languages:
 If your language is not listed, the script is gona be in english.
 You can still ask me to add your language ;)
 
-You can update the script by typing './UPDATE' in the main folder of the script
+You can update the script by typing `./UPDATE` in the main folder of the script
    
 github page: https://github.com/ZKAW/VerifyMail
 
