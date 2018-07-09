@@ -19,11 +19,11 @@ def main():
 
     if check_version(version) is True:
         subprocess.call(["git", "pull", "origin", "master"])
-        return " {2}[✔]{1} Successfully updated to latest version: {2}v{0}".format(version, LIGHTGREEN, GREEN)
+        return " \n{2}[✔]{1} Successfully updated to latest version: {2}v{0}".format(version, LIGHTGREEN, GREEN)
     if check_version(version) is False:
-        return " {2}[✔]{1} You are already up to date in {2}v{0}{1}".format(version, LIGHTBLUE, BLUE)
+        return " \n{2}[✔]{1} You are already up to date in {2}v{0}{1}".format(version, LIGHTBLUE, BLUE)
     else:
-        return " {1}[✘]{0} An unknown {1}error{0} occurred during the update.\n".format(LIGHTRED, RED)
+        return " \n{1}[✘]{0} An unknown {1}error{0} occurred during the update.\n".format(LIGHTRED, RED)
 
 if __name__ == '__main__':
     print("\n     {1}Checking {0}if you are up to date{1}...{0}\n").format(LIGHTBLUE, BLUE)
