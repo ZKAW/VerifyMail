@@ -30,6 +30,9 @@ sudo apt-get install python2.7
 
 By using this script you agree all the terms of the "LICENSE" file.
 
+This program is for testing purposes only !! 
+Using this program for illegal purposes are not allowed.
+
 The script supports the following languages:
 
    • ENGLISH
