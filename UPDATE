@@ -21,7 +21,7 @@ def main():
         subprocess.call(["git", "pull", "origin", "master"])
         return " \n{2}[✔]{1} Successfully updated to latest version: {2}v{0}".format(version, LIGHTGREEN, GREEN)
     if check_version(version) is False:
-        return " \n{2}[✔]{1} You are already up to date in {2}v{0}{1}".format(version, LIGHTBLUE, BLUE)
+        return " {2}[✔]{1} You are already up to date in {2}v{0}{1}".format(version, LIGHTBLUE, BLUE)
     else:
         return " \n{1}[✘]{0} An unknown {1}error{0} occurred during the update.\n".format(LIGHTRED, RED)
 
