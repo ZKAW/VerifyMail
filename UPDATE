@@ -19,7 +19,7 @@ def main():
 
     if check_version(version) is True:
         subprocess.call(["git", "pull", "origin", "master"])
-        return " [✔] Successfully updated     to latest version: v{0}".format(version)
+        return " {2}[✔]{1} Successfully updated to latest version: {2}v{0}".format(version, LIGHTGREEN, GREEN)
     if check_version(version) is False:
         return " {2}[✔]{1} You are already up to date in {2}v{0}{1}".format(version, LIGHTBLUE, BLUE)
     else:
