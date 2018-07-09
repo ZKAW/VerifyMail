@@ -48,4 +48,4 @@ contact email: private.zkaw@gmail.com
 
 PayPal address (for any donations): private.zkaw@gmail.com
 
-Enjoy the script an stay legal ! ;)
+Enjoy the script and stay legal ! ;)
