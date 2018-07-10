@@ -8,7 +8,7 @@ from os import system
 DEFAULT, BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, LIGHTGRAY, DARKGRAY, LIGHTRED, LIGHTGREEN, LIGHTYELLOW, LIGHTBLUE, LIGHTMAGENTA, LIGHTCYAN, WHITE, GRAY = '\33[39m', '\33[30m', '\33[31m', '\33[32m', '\33[33m', '\33[34m', '\33[35m', '\33[36m', '\33[37m', '\33[90m', '\33[91m', '\33[92m', '\33[93m', '\33[94m', '\33[95m', '\33[96m', '\33[97m', '\33[30m'
 
 
-yes = {'yes', 'y', 'YES', 'Y',}
+yes = {'yes', 'y', 'YES', 'Y'}
 no = {'no' ,'n', 'NO', 'N', ''}
 
 choice = raw_input(LIGHTBLUE + "\n Do you really want to uninstall me ? :'( (y/n): ").lower()

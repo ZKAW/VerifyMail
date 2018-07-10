@@ -14,19 +14,38 @@ import socket
 from os import system
 from sys import stdout, exit
 
-#from validate_email import validate_email
+
 
 results = []
 lng = []
 conffldr = "/root/.verifymail"
 listfldr = "/root/.verifymail/lists"
 verifiedfldr = "/root/.verifymail/verified"
+domainsfldr = "/root/.verifymail/domainslists"
+domainsfile = "/root/.verifymail/domainslists/default.txt"
+
+#missinglibs
+
 if not os.path.exists(conffldr):
     os.makedirs(conffldr)
 if not os.path.exists(listfldr):
     os.makedirs(listfldr)
 if not os.path.exists(verifiedfldr):
     os.makedirs(verifiedfldr)
+if not os.path.exists(domainsfldr):
+    os.makedirs(domainsfldr)
+if not os.path.exists(domainsfile):
+    with open(domainsfile, 'a') as domains:
+      domains.write('gmail.com\n')
+      domains.write('hotmail.com\n')
+      domains.write('hotmail.fr\n')
+      domains.write('outlook.com\n')
+      domains.write('orange.fr\n')
+      domains.write('wanadoo.fr\n')
+      domains.write('laposte.net\n')
+      domains.close()
+
+
 os.chdir(conffldr)
 system('clear')
 
@@ -35,10 +54,13 @@ DEFAULT, BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, LIGHTGRAY, DARKGRAY, LI
 
 
 
+
+
+
+#language
+
 locale.setlocale(locale.LC_ALL, "")
 lng = locale.getlocale(locale.LC_MESSAGES)[0]
-
-#langage
 
 if 'fr' in lng:
   print("\n")
@@ -57,6 +79,7 @@ if 'fr' in lng:
   {3}[{2}1{3}]{2}     Effectuer une recherche pour une seule email.
   {3}[{2}2{3}]{2}     Effectuer une recherche depuis une liste d'email.
   {3}[{2}3{3}]{2}     Créer une liste d'email.
+  {3}[{2}4{3}]{2}     Créer une liste de domaines.
 
   {3}[{1}0{3}]{1}     Quitter.
 
@@ -86,17 +109,26 @@ if 'fr' in lng:
 
   LastNameVar = "  Nom: "
 
-  FileNameVar = "  Nom du fichier: "
+  FileNameVar = "  Nom de la liste: "
 
   AddedListVar1 = '\n\n Liste ajoutée/modifiée avec succès sous le nom "'
 
   AddedListVar2 = '" pour '
+
+  AddedListVar3 = ' avec "'
 
   GoodByeVar = "\n Merci d'avoir utilisé"
 
   MultiFileNameVar = "  Nom du fichier de sauvegarde: "
 
   ActualPathVar = " Chemin actuel: "
+
+  DomainToUseVar = "  Domaines à utiliser "
+
+  DomainCreatorVar = '''
+ {0}Écrivez le {1}domaine {0}[ex: {1}gmail.com{0}], appuyez sur {1}ENTRER{0} pour en écrire un autre.
+ Faites {1}CTRL + C {0}quand vous avez terminé.
+             '''.format(LIGHTMAGENTA, MAGENTA)
 
   CanceledVar = '''
 
@@ -127,6 +159,7 @@ else:
   {3}[{2}1{3}]{2}     Suchen Sie nach einer einzelnen E-Mail.
   {3}[{2}2{3}]{2}     Führen Sie eine Suche mit einer E-Mail-Liste durch.
   {3}[{2}3{3}]{2}     Erstellen Sie eine E-Mail-Liste.
+  {3}[{2}4{3}]{2}     Erstellen Sie eine Liste von Domänen
 
   {3}[{1}0{3}]{1}     Verlassen.
 
@@ -156,17 +189,26 @@ else:
 
      LastNameVar = "  Name: "
 
-     FileNameVar = "  Name der Datei: "
+     FileNameVar = "  Liste name: "
 
      AddedListVar1 = '\n\n Liste hinzugefügt / geändert erfolgreich unter dem Namen "'
 
      AddedListVar2 = '" für '
+
+     AddedListVar3 = ' mit "'
 
      GoodByeVar = "\n Vielen Dank für die Verwendung von"
 
      MultiFileNameVar = "  Name der Sicherungsdatei: "
 
      ActualPathVar = " Aktueller Pfad: "
+
+     DomainToUseVar = "  Zu verwendende Domains "
+
+     DomainCreatorVar = '''
+ {0}Schreiben Sie {1}Domain {0}[ex: {1}gmail.com{0}], drücken Sie {1}ENTER {0}um eine weitere Domain zu schreiben.
+ Drücken Sie {1}STRG + C {0}wenn Sie fertig sind.
+             '''.format(LIGHTMAGENTA, MAGENTA)
 
      CanceledVar = '''
 
@@ -198,6 +240,7 @@ else:
   {3}[{2}1{3}]{2}     Efectuar una búsqueda de un único correo electrónico.
   {3}[{2}2{3}]{2}     Buscar en una lista de correo electrónico.
   {3}[{2}3{3}]{2}     Crear una lista de correo electrónico.
+  {3}[{2}4{3}]{2}     Crea una lista de dominios.
 
   {3}[{1}0{3}]{1}     Salir.
 
@@ -227,17 +270,26 @@ else:
 
             LastNameVar = "  Apellido: "
 
-            FileNameVar = "  Nombre de fichero: "
+            FileNameVar = "  Nombre de la lista: "
 
             AddedListVar1 = '\n\n Lista añadida/modificada con éxito bajo el nombre "'
 
             AddedListVar2 = '" para '
+
+            AddedListVar3 = ' con "'
 
             GoodByeVar = "\n Gracias por usar"
 
             MultiFileNameVar = "  Nombre del fichero de copia de seguridad: "
 
             ActualPathVar = " Camino actual: "
+
+            DomainToUseVar = "  Dominios para usar "
+
+            DomainCreatorVar = '''
+ {0}Escribe el {1}dominio {0}[ex: {1}gmail.com{0}], presiona {1}ENTRAR {0}para escribir otro.
+ Presione {1}CTRL + C {0}cuando termine.
+             '''.format(LIGHTMAGENTA, MAGENTA)
 
             CanceledVar = '''
 
@@ -268,6 +320,7 @@ else:
   {3}[{2}1{3}]{2}     Perform a search of a single email.
   {3}[{2}2{3}]{2}     Perfom a search from an email list.
   {3}[{2}3{3}]{2}     Create an email list.
+  {3}[{2}4{3}]{2}     Create a list of domains.
 
   {3}[{1}0{3}]{1}     Exit.
 
@@ -297,17 +350,26 @@ else:
 
              LastNameVar = "  Last name: "
 
-             FileNameVar = "  Name of the file: "
+             FileNameVar = "  List name: "
 
              AddedListVar1 = '\n\n List added/modified with success under the name "'
 
              AddedListVar2 = '" for '
+
+             AddedListVar3 = ' with "'
 
              GoodByeVar = "\n Thanks for using"
 
              MultiFileNameVar = "  Name of the backup file: "
 
              ActualPathVar = "  Actual path: "
+
+             DomainToUseVar = "  Domains to use "
+
+             DomainCreatorVar = '''
+ {0}Write {1}domain {0}[ex: {1}gmail.com{0}], press {1}ENTER {0}to write another.
+ Press {1}CTRL + C {0}when finished.
+             '''.format(LIGHTMAGENTA, MAGENTA)
 
              CanceledVar = '''
 
@@ -344,7 +406,7 @@ def welcome():
   {1}  ╚═══╝  ╚══════╝╚═╝  ╚═╝╚═╝╚═╝        ╚═╝    ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝╚══════╝
                                                         {3}╔╗ ┬ ┬  ╔═╗╦╔═╔═╗╦ ╦
                                                  {0}───    {3}╠╩╗└┬┘  ╔═╝╠╩╗╠═╣║║║
-    -> v1.1                                             {3}╚═╝ ┴   ╚═╝╩ ╩╩ ╩╚╩╝
+    -> v1.2                                             {3}╚═╝ ┴   ╚═╝╩ ╩╩ ╩╚╩╝
                                       {2}The possible is already done,
                                                {1}working on the impossible.'''.format(LIGHTGRAY, MAGENTA, LIGHTMAGENTA, LIGHTRED, RED, GRAY)
 
@@ -511,7 +573,7 @@ def multi():
     StoppedVar = InvalidPathVar
     print("\n" + LIGHTBLUE + ActualPathVar + BLUE + os.getcwd() + "/\n")
     lists = os.listdir(listfldr)
-    print(lists)
+    print(" " + str(lists))
     inputfil = raw_input(LIGHTMAGENTA + MultiInputVar + LIGHTGRAY)
     multifilename = raw_input(LIGHTMAGENTA + MultiFileNameVar + LIGHTGRAY)
     system('clear')
@@ -569,6 +631,8 @@ def multi():
                       multi()
                   if ask.upper() == "3":
                       creator()
+                  if ask.upper() == "4":
+                      domaincreator()
                   if ask.upper() == "0":
                       exit(0)
               except:
@@ -585,11 +649,13 @@ def multi():
        try:
            ask = raw_input(LIGHTMAGENTA + "  VerifyMail > " + LIGHTGRAY)
            if ask.upper() == "1":
-               single()
+              single()
            if ask.upper() == "2":
                multi()
            if ask.upper() == "3":
                creator()
+           if ask.upper() == "4":
+               domaincreator()
            if ask.upper() == "0":
                exit(0)
 
@@ -620,6 +686,8 @@ def creator():
 
   try:
 
+    os.chdir(listfldr)
+
     prenom = raw_input (LIGHTMAGENTA + FirstNameVar + LIGHTGRAY)
 
 
@@ -631,74 +699,79 @@ def creator():
 
 
 
-    outF = open("/root/.verifymail/lists/" + filename + ".txt", "a")
 
 
+    os.chdir(domainsfldr)
+    print("\n" + LIGHTBLUE + ActualPathVar + BLUE + os.getcwd() + "/\n")
 
+    lists = os.listdir(domainsfldr)
+    print(" " + str(lists) + "\n")
 
-#prenom.nom
+    defaultdomain = {'', ' ', 'default', 'default.txt'}
 
-    outF.write(prenom+"."+nom+"@gmail.com\n")
-    outF.write(prenom+"."+nom+"@hotmail.com\n")
-    outF.write(prenom+"."+nom+"@hotmail.fr\n")
-    outF.write(prenom+"."+nom+"@outlook.com\n")
-    outF.write(prenom+"."+nom+"@orange.fr\n")
-    outF.write(prenom+"."+nom+"@wanadoo.fr\n")
+    domaintouse = raw_input (LIGHTMAGENTA + DomainToUseVar + "[BLANK = default.txt]: " + LIGHTGRAY)
 
-    outF.write(prenom+"."+nom+"@laposte.net\n")
+    if domaintouse in defaultdomain:
+        domaintouse = "default.txt"
 
+    with open("/root/.verifymail/domainslists/" + domaintouse, "r") as ins:
+        array = []
+        os.chdir(listfldr)
+        text_file = open(filename, "a")
+        for line in ins:
+            array.append(line)
+            text_file.write(prenom + "." + nom + "@" + line)
+            text_file.write(nom + "." + prenom + "@" + line)
+            text_file.write(prenom + nom + "@" + line)
+            text_file.write(nom + prenom + "@" + line)
+        text_file.close()
 
-
-
-#nom.prenom
-
-
-
-    outF.write(nom+"."+prenom+"@gmail.com\n")
-    outF.write(nom+"."+prenom+"@hotmail.com\n")
-    outF.write(nom+"."+prenom+"@hotmail.fr\n")
-    outF.write(nom+"."+prenom+"@outlook.com\n")
-    outF.write(nom+"."+prenom+"@orange.fr\n")
-    outF.write(nom+"."+prenom+"@wanadoo.fr\n")
-
-    outF.write(nom+"."+prenom+"@laposte.net\n")
-
-
-
-
-#prenomnom
-
-
-    outF.write(prenom+nom+"@gmail.com\n")
-    outF.write(prenom+nom+"@hotmail.com\n")
-    outF.write(prenom+nom+"@hotmail.fr\n")
-    outF.write(prenom+nom+"@outlook.com\n")
-    outF.write(prenom+nom+"@orange.fr\n")
-    outF.write(prenom+nom+"@wanadoo.fr\n")
-    outF.write(prenom+nom+"@laposte.net\n")
-
-
-#nomprenom
-
-
-    outF.write(nom+prenom+"@gmail.com\n")
-    outF.write(nom+prenom+"@hotmail.com\n")
-    outF.write(nom+prenom+"@hotmail.fr\n")
-    outF.write(nom+prenom+"@outlook.com\n")
-    outF.write(nom+prenom+"@orange.fr\n")
-    outF.write(nom+prenom+"@wanadoo.fr\n")
-    outF.write(nom+prenom+"@laposte.net\n")
-
-
-
-    outF.close()
     system('clear')
-    print(AddedListVar1 + MAGENTA +filename+ LIGHTGRAY + AddedListVar2 + MAGENTA + prenom + ' ' + nom + LIGHTGRAY + ' !\n')
+    os.chdir(conffldr)
+    print(LIGHTGRAY + AddedListVar1 + MAGENTA +filename+ LIGHTGRAY + AddedListVar2 + MAGENTA + prenom + ' ' + nom + LIGHTGRAY + "\n" + AddedListVar3 + MAGENTA + domaintouse + LIGHTGRAY + '" !\n')
     aide()
 
   except KeyboardInterrupt:
       system('clear')
       aide()
+
+def domaincreator():
+    system('clear')
+    os.chdir(domainsfldr)
+    print(DomainCreatorVar)
+
+    domainfilename = raw_input(LIGHTMAGENTA + "\n  File name: " + LIGHTGRAY)
+    while True:
+     with open(domainfilename, 'a') as domainlist:
+
+      try:
+          domainname = raw_input(LIGHTMAGENTA + "  Domain name: " + LIGHTGRAY)
+          domainlist.write(domainname + '\n')
+          print(LIGHTMAGENTA + "   Domain added: " + MAGENTA + domainname)
+      except KeyboardInterrupt:
+
+
+          while True:
+              try:
+                  system('clear')
+                  print(LIGHTMAGENTA + "\n  Domain list saved in " + MAGENTA + domainsfldr + "/" + domainfilename + LIGHTMAGENTA + " !\n")
+                  domainlist.close()
+                  aide()
+                  ask = raw_input(LIGHTMAGENTA + "  VerifyMail > " + LIGHTGRAY)
+                  if ask.upper() == "1":
+                         single()
+                  if ask.upper() == "2":
+                         multi()
+                  if ask.upper() == "3":
+                         creator()
+                  if ask.upper() == "4":
+                         domaincreator()
+                  if ask.upper() == "0":
+                         exit(0)
+              except:
+                  exit(0)
+
+
 welcome()
 aide()
 
@@ -713,9 +786,10 @@ while True:
                multi()
         if ask.upper() == "3":
                creator()
+        if ask.upper() == "4":
+               domaincreator()
         if ask.upper() == "0":
                exit(0)
-
 
     except:
         print("\n" + MAGENTA + GoodByeVar + LIGHTMAGENTA + " VerifyMail " + MAGENTA + "!\n")

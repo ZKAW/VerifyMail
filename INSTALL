@@ -23,6 +23,9 @@ pip2path = '/usr/bin/pip2'
 conffldr = "/root/.verifymail"
 listfldr = "/root/.verifymail/lists"
 verifiedfldr = "/root/.verifymail/verified"
+domainsfldr = "/root/.verifymail/domainslists"
+domainsfile = "/root/.verifymail/domainslists/default.txt"
+
 
 
 print(RED + "\n[!] " + LIGHTRED + "REMINDER: THE SCRIPT IS ONLY WORKING WITH" + RED + " Python 2.7 " + LIGHTRED + "!\n")
@@ -41,7 +44,7 @@ else:
     system('apt-get install python2.7')
 
 
-time.sleep(1.5)
+time.sleep(0.5)
 
 print(BLUE + "\n Checking if pip2 is installed...")
 
@@ -60,22 +63,39 @@ system('chmod +x verifymail')
 system('chmod +x INSTALL')
 system('chmod +x UNINSTALL')
 system('chmod +x UPDATE')
+time.sleep(0.5)
 
 
-print(BLUE + "\n Creating .verifymail config files in /root/.verifymail" + LIGHTBLUE)
-time.sleep(0.5)
-print(BLUE + " Creating /root/.verifymail/" + LIGHTBLUE)
-time.sleep(0.5)
 if not os.path.exists(conffldr):
+    print(BLUE + "\n Creating .verifymail config files in " + conffldr + LIGHTBLUE)
+    time.sleep(0.5)
+    print(BLUE + "\n Creating " + conffldr + LIGHTBLUE)
     os.makedirs(conffldr)
-print(BLUE + " Creating /root/.verifymail/lists" + LIGHTBLUE)
-time.sleep(0.5)
+    time.sleep(0.5)
 if not os.path.exists(listfldr):
+    print(BLUE + "\n Creating " + listfldr + LIGHTBLUE)
     os.makedirs(listfldr)
-print(BLUE + " Creating /root/.verifymail/verified" + LIGHTBLUE)
-time.sleep(0.5)
+    time.sleep(0.5)
 if not os.path.exists(verifiedfldr):
+    print(BLUE + "\n Creating " + verifiedfldr + LIGHTBLUE)
     os.makedirs(verifiedfldr)
+    time.sleep(0.5)
+if not os.path.exists(domainsfldr):
+    print(BLUE + "\n Creating " + domainsfldr + LIGHTBLUE)
+    os.makedirs(domainsfldr)
+    time.sleep(0.5)
+if not os.path.exists(domainsfile):
+    print(BLUE + "\n Writing basic domains list in " + domainsfile + LIGHTBLUE)
+    time.sleep(0.5)
+    with open(domainsfile, 'a') as domains:
+      domains.write('gmail.com\n')
+      domains.write('hotmail.com\n')
+      domains.write('hotmail.fr\n')
+      domains.write('outlook.com\n')
+      domains.write('orange.fr\n')
+      domains.write('wanadoo.fr\n')
+      domains.write('laposte.net\n')
+
 
 
 print(BLUE + '\n Installing requirements from "requirements.txt" file\n' + LIGHTBLUE)
