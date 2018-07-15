@@ -33,8 +33,7 @@ sudo apt-get install python2.7
  
  `verifymail`
  
- Without installation completed:
- In VerifyMail main folder:
+ Without installation completed, in VerifyMail main folder:
  
  `./verifymail`
 
