@@ -27,6 +27,11 @@ sudo apt-get install python2.7
 
 `./INSTALL`
 
+**USE**
+
+ Once the installtion are completed type `verifymail` in you terminal to launch the script or go to the "VerifyMail"
+ folder and type `./verifymail`
+
 **INFO**
 
 By using this script you agree all the terms of the "LICENSE" file.
