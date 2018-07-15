@@ -27,10 +27,16 @@ sudo apt-get install python2.7
 
 `./INSTALL`
 
-**USE**
+**LAUNCH**
 
- Once the installtion are completed type `verifymail` in you terminal to launch the script or go to the "VerifyMail"
- folder and type `./verifymail`
+ With installation completed:
+ 
+ `verifymail`
+ 
+ Without installation completed:
+ In VerifyMail main folder:
+ 
+ `./verifymail`
 
 **INFO**
 
