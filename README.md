@@ -12,7 +12,7 @@ By: **ZKAW**
 The script only works with python 2.7, make sure you have it.
 You can install it by launching the INSTALL file, or by typing
 
-sudo apt-get install python2.7
+`sudo apt-get install python2.7`
 
 
 **DOWNLOAD**
