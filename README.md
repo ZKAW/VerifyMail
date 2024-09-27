@@ -1,4 +1,6 @@
 # VerifyMail
+/!\ NO LONGER MAINTAINED /!\
+
 Copyright (c) 2018 VerifyMail
 
 VerifyMail is a python script to check if one or more emails are valid
